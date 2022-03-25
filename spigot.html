@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Redstonecraft</title>
+    
+<style>
+    #gh_text {
+        padding: 20px;
+    }
+</style>
+<script defer>
+    (function () {
+        Array.prototype.sum = function () { return this.reduce((i1, i2) => i1 + i2) }
+        fetch("https://api.github.com/users/Redstonecrafter0/repos").then(d => d.json()).then(d =>
+            document.getElementById('gh_text').textContent =
+                `I have currently ${d.length} public repositories on my GitHub page with ${d.map(i => i.size).sum()} kB of data. ${d.map(i => i.fork ? 1 : 0).sum()} of them are forks.`
+        )
+    })()
+</script>
+
+</head>
+<body>
+<header>
+    <a href="/"><img src="/static/img/logo.svg" alt=""></a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/github">GitHub</a>
+        <a href="/spigot">Spigot</a>
+        <a href="https://youtube.com/Redstonecrafter0">YouTube</a>
+    </nav>
+</header>
+<main>
+    
+<section>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+        <h1><a href="https://www.spigotmc.org/members/redstonecrafter0.576864/">Spigot</a></h1>
+        <p>I publish my Minecraft related stuff also on <a href="https://spigotmc.org/">SpigotMC</a>. Check it out if you want to.</p>
+    </div>
+</section>
+<section style="flex-direction: column">
+    <h1 style="text-transform: uppercase; text-align: center">My favorite Projects</h1>
+    
+        <article style="flex-direction: row; justify-content: space-between; background: #ffffff20">
+            <div>
+                <a href="https://www.spigotmc.org/resources/redstoneapi.88273/"><h2>RedstoneAPI</h2></a>
+                <p>A Library for everything.</p>
+                <a href="https://github.com/Redstonecrafter0/RedstoneAPI">Source-Code</a>
+            </div>
+            <img src="https://www.spigotmc.org/data/resource_icons/88/88273.jpg?1611574349" alt="Icon" height="190">
+        </article>
+    
+        <article style="flex-direction: row-reverse; justify-content: space-between; text-align: right">
+            <div>
+                <a href="https://www.spigotmc.org/resources/lanservers.99834/"><h2>LanServers</h2></a>
+                <p>A lightweight plugin for easier access to your local Minecraft Servers.</p>
+                <a href="https://github.com/Redstonecrafter0/LanServers">Source-Code</a>
+            </div>
+            <img src="https://static.spigotmc.org/styles/spigot/xenresource/resource_icon.png" alt="Icon" height="190">
+        </article>
+    
+</section>
+
+</main>
+<div id="footer">
+    <div class="group">
+        <a href="https://github.com/Redstonecrafter0" class="social"><img src="static/img/GitHub-Mark-Light-64px.png" style="height: .75rem" alt="GitHub"><span>Redstonecrafter0</span></a>
+        <a href="https://www.spigotmc.org/members/redstonecrafter0.576864/" class="social"><img src="https://static.spigotmc.org/img/spigot.png" style="height: .75rem" alt="Spigot"><span>Redstonecrafter0</span></a>
+        <a href="javascript:window.scrollTo(0, 0)">Scroll to top</a>
+    </div>
+</div>
+</body>
+</html>
