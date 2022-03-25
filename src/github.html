@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block main %}
+<section style="flex-direction: row">
+    <div style="display: flex; flex-direction: column">
+        <img style="margin: 10px" width="300" src="https://github-readme-stats.vercel.app/api?username=Redstonecrafter0&show_icons=true&theme=dark" alt="Github Stats">
+        <img style="margin: 10px" width="300" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Redstonecrafter0&langs_count=5&theme=dark" alt="Github Langs">
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+        <h1><a href="https://github.com/Redstonecrafter0">GitHub</a></h1>
+        <p id="gh_text">Loading...</p>
+    </div>
+</section>
+<section style="flex-direction: column">
+    <h1 style="text-transform: uppercase; text-align: center">My favorite Projects</h1>
+    {% for k, v in {
+        'RedstoneAPI': {'text': 'A Library for everything.'},
+        'LanServers': {
+            'text': 'A lightweight plugin for easier access to your local Minecraft Servers.',
+            'gh_pages': {
+                'Qodana-Report': 'https://redstonecrafter0.github.io/LanServers/'
+            }
+        },
+        'Redstonecloud': {
+            'text': 'A neat lightweight Kubernetes-native Minecraft Cloud System designed for huge workloads.',
+            'gh_pages': {
+                'Dokka-Docs': 'https://redstonecrafter0.github.io/Redstonecloud/',
+                'Qodana-Report': 'https://redstonecrafter0.github.io/Redstonecloud/qodana'
+            },
+            'wip': True
+        },
+        'System-Monitoring': {
+            'text': 'A monitor for your PCs stats.',
+            'gh_pages': {
+                'Qodana-Report': 'https://redstonecrafter0.github.io/System-Monitoring/'
+            }
+        },
+        'KotlinMcBuilder': {'text': 'A local webserver for building a Spigot Kotlin Plugin.'},
+        'WebsocketClient': {'text': 'A Chrome Extension to debug Websockets.'},
+        'Cloudflare-DDNS-Client': {'text': 'A Python Client to update the IP of your Cloudflare Domain.'},
+        'RedstoneUtils': {'text': 'A Minecraft Plugin that serves many Utilities.', 'wip': True},
+        'LimboServer': {'text': 'A Minecraft Server to handle a large amount of players in a queue system.', 'wip': True},
+        'MCRcon': {'text': 'A Python Library for accessing Minecraft\'s RCon Protocol.'}
+    }.items() %}
+        <article style="flex-direction: {{ 'row-reverse' if loop.index % 2 == 0 else 'row' }}; justify-content: space-between; {{ 'text-align: right' if loop.index % 2 == 0 else 'background: #ffffff20' }}">
+            <div>
+                <a class="wip" href="https://github.com/Redstonecrafter0/{{ k }}">
+                    {% if 'wip' in v.keys() and loop.index % 2 == 0 %}
+                    <img title="WIP" src="static/img/wip.svg" style="height: 1.5rem" alt="WIP">
+                    {% endif %}
+                    <h2 style="display: inline">{{ k }}</h2>
+                    {% if 'wip' in v.keys() and loop.index % 2 == 1 %}
+                    <img title="WIP" src="static/img/wip.svg" style="height: 1.5rem" alt="WIP">
+                    {% endif %}
+                </a>
+                <p>{{ v.text }}</p>
+                {% if 'gh_pages' in v %}
+                    <span>
+                        Sites:
+                    {% for n, r in v['gh_pages'].items() %}
+                        <a href="{{ r }}">{{ n }}</a>
+                    {% endfor %}
+                    </span>
+                {% endif %}
+            </div>
+            <img src="https://github-readme-stats.vercel.app/api/pin/?username=Redstonecrafter0&repo={{ k }}&theme=dark" alt="">
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}
+{% block head %}
+<style>
+    #gh_text {
+        padding: 20px;
+    }
+</style>
+<script defer>
+    (function () {
+        Array.prototype.sum = function () { return this.reduce((i1, i2) => i1 + i2) }
+        fetch("https://api.github.com/users/Redstonecrafter0/repos").then(d => d.json()).then(d =>
+            document.getElementById('gh_text').textContent =
+                `I have currently ${d.length} public repositories on my GitHub page with ${d.map(i => i.size).sum()} kB of data. ${d.map(i => i.fork ? 1 : 0).sum()} of them are forks.`
+        )
+    })()
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block main %}
+<section>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+        <h1><a href="https://www.spigotmc.org/members/redstonecrafter0.576864/">Spigot</a></h1>
+        <p>I publish my Minecraft related stuff also on <a href="https://spigotmc.org/">SpigotMC</a>. Check it out if you want to.</p>
+    </div>
+</section>
+<section style="flex-direction: column">
+    <h1 style="text-transform: uppercase; text-align: center">My favorite Projects</h1>
+    {% for k, v in {
+        'RedstoneAPI': {
+            'text': 'A Library for everything.',
+            'id': 88273,
+            'icon': 'https://www.spigotmc.org/data/resource_icons/88/88273.jpg?1611574349'
+        },
+        'LanServers': {
+            'text': 'A lightweight plugin for easier access to your local Minecraft Servers.',
+            'id': 99834,
+            'icon': 'https://static.spigotmc.org/styles/spigot/xenresource/resource_icon.png'
+        }
+    }.items() %}
+        <article style="flex-direction: {{ 'row-reverse' if loop.index % 2 == 0 else 'row' }}; justify-content: space-between; {{ 'text-align: right' if loop.index % 2 == 0 else 'background: #ffffff20' }}">
+            <div>
+                <a href="https://www.spigotmc.org/resources/{{ k.lower() }}.{{ v.id }}/"><h2>{{ k }}</h2></a>
+                <p>{{ v.text }}</p>
+                <a href="https://github.com/Redstonecrafter0/{{ k }}">Source-Code</a>
+            </div>
+            <img src="{{ v.icon }}" alt="Icon" height="190">
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}
+{% block head %}
+<style>
+    #gh_text {
+        padding: 20px;
+    }
+</style>
+<script defer>
+    (function () {
+        Array.prototype.sum = function () { return this.reduce((i1, i2) => i1 + i2) }
+        fetch("https://api.github.com/users/Redstonecrafter0/repos").then(d => d.json()).then(d =>
+            document.getElementById('gh_text').textContent =
+                `I have currently ${d.length} public repositories on my GitHub page with ${d.map(i => i.size).sum()} kB of data. ${d.map(i => i.fork ? 1 : 0).sum()} of them are forks.`
+        )
+    })()
+</script>
+{% endblock %}

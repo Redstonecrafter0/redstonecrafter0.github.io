@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="panel">
+    <h1 id="code">404</h1>
+    <p>Not Found</p>
+</div>
+<canvas style="position: fixed; top: 0; z-index: -1" id="background"></canvas>
+<script defer>
+    (function () {
+        const scene = new THREE.Scene()
+        const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight)
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.getElementById('background'),
+            antialias: true
+        })
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight
+            camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight)
+        })
+        renderer.setPixelRatio(window.devicePixelRatio)
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        camera.position.x = 16
+        camera.position.z = 16
+        camera.position.y = 1.5
+        camera.rotation.y = 0.8444
+        scene.add(new THREE.AmbientLight(0xffffff))
+        let geometry = new THREE.TorusGeometry(10, 3, 16, 100)
+        let material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            wireframe: true
+        })
+        const torus = new THREE.Mesh(geometry, material)
+        scene.add(torus)
+        for (let i = 0; i < 200; i++) {
+            let geometry = new THREE.SphereGeometry(0.1, 24, 24)
+            let material = new THREE.MeshPhongMaterial({ color : 0xffffff })
+            let star = new THREE.Mesh(geometry, material)
+            let x = THREE.MathUtils.randFloatSpread(100)
+            let y = THREE.MathUtils.randFloatSpread(100)
+            let z = THREE.MathUtils.randFloatSpread(100)
+            star.position.set(x, y, z)
+            scene.add(star)
+        }
+        const loader = new THREE.STLLoader()
+        loader.load(`/static/model/${document.getElementById('code').textContent}.stl`, geometry => {
+            const code = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                wireframe: true
+            }))
+            code.scale.x = 5
+            code.scale.y = 5
+            code.scale.z = 5
+            code.rotation.x = -2
+            scene.add(code)
+            let time = 0
+            function render(newTime) {
+                requestAnimationFrame(render)
+                const delta = newTime - time
+                time = newTime
+                torus.rotation.x += 0.0001 * delta
+                torus.rotation.y += 0.0001 * delta
+                torus.rotation.z += 0.0001 * delta
+                code.rotation.z += 0.0002 * delta
+                renderer.render(scene, camera)
+            }
+            requestAnimationFrame(render)
+        })
+    })()
+</script>
+{% endblock %}
+{% block head %}
+<style>
+    main div {
+        position: relative;
+        text-align: center;
+        width: fit-content;
+        padding: 10px 50px;
+        margin: 10px;
+        border: 2px solid #ffffff88;
+        border-radius: 5px;
+        background: var(--bg3);
+        left: 50%;
+        transform: translateX(-50%);
+        transition: var(--anim);
+        cursor: default;
+        user-select: none;
+    }
+</style>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://threejs.org/examples/js/loaders/STLLoader.js"></script>
+{% endblock %}

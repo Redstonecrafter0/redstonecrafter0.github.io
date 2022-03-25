@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Redstonecraft</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <a href="/"><img src="/static/img/logo.svg" alt=""></a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/github">GitHub</a>
+        <a href="/spigot">Spigot</a>
+        <a href="https://youtube.com/Redstonecrafter0">YouTube</a>
+    </nav>
+</header>
+<main>
+    {% block main %}
+    {% endblock %}
+</main>
+<div id="footer">
+    <div class="group">
+        <a href="https://github.com/Redstonecrafter0" class="social"><img src="static/img/GitHub-Mark-Light-64px.png" style="height: .75rem" alt="GitHub"><span>Redstonecrafter0</span></a>
+        <a href="https://www.spigotmc.org/members/redstonecrafter0.576864/" class="social"><img src="https://static.spigotmc.org/img/spigot.png" style="height: .75rem" alt="Spigot"><span>Redstonecrafter0</span></a>
+        <a href="javascript:window.scrollTo(0, 0)">Scroll to top</a>
+    </div>
+</div>
+</body>
+</html>
