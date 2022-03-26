@@ -16,11 +16,6 @@ jobs:
           python-version: '3.10'
       - run: pip install -r requirements.txt
       - run: python render.py
-      - name: Auto Minify
-        uses: nizarmah/auto-minify@v2.1
-        with:
-          directory: 'out'
-          overwrite: true
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
