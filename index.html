@@ -12,6 +12,26 @@
     <meta property="theme-color" content="#0024FF"/>
     
 <script defer async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css">
+<script defer type="module">
+    import { Octokit } from 'https://cdn.skypack.dev/@octokit/core'
+    (function () {
+        const octokit = new Octokit()
+        fetch('https://raw.githubusercontent.com/Redstonecrafter0/Redstonecrafter0/master/README.md')
+            .then(d => d.text())
+            .then(d => octokit.request('POST /markdown', {text: d}))
+            .then(d => document.getElementById('github-readme').innerHTML = d.data)
+    })()
+</script>
+<style>
+    .markdown-body {
+		box-sizing: border-box;
+        width: 100%;
+        border-radius: 5px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+</style>
 
 </head>
 <body>
@@ -26,6 +46,9 @@
 </header>
 <main>
     
+<section>
+    <div id="github-readme" class="markdown-body"></div>
+</section>
 <section style="justify-content: space-between">
     <div style="flex: 1">
         <h2>Twitter</h2>
