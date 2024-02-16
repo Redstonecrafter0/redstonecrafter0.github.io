@@ -29,8 +29,6 @@
         user-select: none;
     }
 </style>
-<script src="https://threejs.org/build/three.min.js"></script>
-<script src="https://threejs.org/examples/js/loaders/STLLoader.js"></script>
 
 </head>
 <body>
@@ -50,8 +48,19 @@
     <p>Not Found</p>
 </div>
 <canvas style="position: fixed; top: 0; z-index: -1" id="background"></canvas>
-<script defer>
-    (function () {
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+</script>
+<script defer type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+
+(function () {
         const scene = new THREE.Scene()
         const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight)
         const renderer = new THREE.WebGLRenderer({
@@ -87,7 +96,7 @@
             star.position.set(x, y, z)
             scene.add(star)
         }
-        const loader = new THREE.STLLoader()
+        const loader = new STLLoader()
         loader.load(`/static/model/${document.getElementById('code').textContent}.stl`, geometry => {
             const code = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
                 color: 0xffffff,
