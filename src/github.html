@@ -11,14 +11,36 @@
     </div>
 </section>
 <section style="flex-direction: column">
-    <h1 style="text-transform: uppercase; text-align: center">My favorite Projects</h1>
+    <h1 style="text-transform: uppercase; text-align: center">Featured Projects</h1>
     {% for k, v in {
-        'RedstoneAPI': {'text': 'A Library for everything.'},
         'LanServers': {
             'text': 'A lightweight plugin for easier access to your local Minecraft Servers.',
             'gh_pages': {
                 'Qodana-Report': 'https://redstonecrafter0.github.io/LanServers/'
             }
+        },
+        'Sweep-Line-Web': {
+            'text': 'Jest a mesmerizing line',
+            'gh_pages': {
+                'Demo': 'https://redstonecrafter0.github.io/Sweep-Line-Web/'
+            }
+        },
+        'GlslTest': {
+            'text': 'GLSL Testing Utility'
+        },
+        'Amber': {
+            'text': 'Quilt Minecraft Modding Base',
+            'gh_pages': {
+                'Docs': 'https://redstonecrafter0.github.io/Amber/dokka/',
+                'Qodana-Report': 'https://redstonecrafter0.github.io/Amber/qodana/'
+            },
+            'wip': true
+        },
+        '3D-Default-Models': {
+            'text': 'Minecraft Resource Pack that provides some 3D Models'
+        },
+        'WindowsReadMediaInfo': {
+            'text': 'PoC for getting metadata of currently playing media on Windows'
         },
         'Redstonecloud': {
             'text': 'A neat lightweight Kubernetes-native Minecraft Cloud System designed for huge workloads.',
@@ -34,10 +56,8 @@
                 'Qodana-Report': 'https://redstonecrafter0.github.io/System-Monitoring/'
             }
         },
-        'KotlinMcBuilder': {'text': 'A local webserver for building a Spigot Kotlin Plugin.'},
         'WebsocketClient': {'text': 'A Chrome Extension to debug Websockets.'},
         'Cloudflare-DDNS-Client': {'text': 'A Python Client to update the IP of your Cloudflare Domain.'},
-        'RedstoneUtils': {'text': 'A Minecraft Plugin that serves many Utilities.', 'wip': True},
         'LimboServer': {'text': 'A Minecraft Server to handle a large amount of players in a queue system.', 'wip': True},
         'MCRcon': {'text': 'A Python Library for accessing Minecraft\'s RCon Protocol.'}
     }.items() %}
